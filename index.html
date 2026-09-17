@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -29,9 +30,9 @@
     font-family: 'Inter', sans-serif;
     min-height: 100vh;
     display:flex;
-    align-items:center;
+    align-items:flex-start;
     justify-content:center;
-    padding: 24px 16px;
+    padding: 32px 16px 60px;
     line-height:1.55;
   }
 
@@ -422,9 +423,18 @@
 
   .nav-row{
     display:flex;
+    align-items:stretch;
     gap:10px;
+    position: sticky;
+    bottom: 0;
+    background: var(--card);
+    padding-top: 14px;
+    margin-top: 6px;
+    z-index: 5;
   }
-  .nav-row .btn-ghost{ margin-top:0; flex-shrink:0; padding:15px 8px; }
+  .nav-row .btn{ width:auto; }
+  .nav-row .btn-primary{ flex:1 1 auto; }
+  .nav-row .btn-ghost{ margin-top:0; flex:0 0 auto; padding:15px 18px; white-space:nowrap; }
 
   /* RESULTADO */
   .result-icon{
@@ -481,6 +491,64 @@
     padding: 16px;
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
+  }
+
+  .next-steps-box{
+    background: #fff;
+    border: 1.5px solid var(--border);
+    border-radius: 18px;
+    padding: 22px 20px;
+    margin-bottom: 18px;
+  }
+  .next-steps-title{
+    font-family:'Lora', serif;
+    font-weight:700;
+    font-size:1.05rem;
+    text-align:center;
+    margin-bottom:8px;
+  }
+  .next-steps-text{
+    font-size:0.88rem;
+    color: var(--ink-soft);
+    text-align:center;
+    margin-bottom:20px;
+  }
+  .step-row{
+    display:flex;
+    gap:14px;
+    align-items:flex-start;
+    margin-bottom:16px;
+  }
+  .step-row:last-child{ margin-bottom:0; }
+  .step-num{
+    flex-shrink:0;
+    width:28px; height:28px;
+    border-radius:50%;
+    background: var(--oliva-light);
+    color: var(--oliva);
+    font-weight:700;
+    font-family:'Lora', serif;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:0.9rem;
+  }
+  .step-content{ flex:1; }
+  .step-label{
+    font-size:0.88rem;
+    font-weight:600;
+    color: var(--ink);
+    margin-bottom:10px;
+  }
+  .btn-secondary{
+    background: #fff;
+    color: var(--terracota-dark);
+    border: 1.5px solid var(--terracota);
+    box-shadow:none;
+  }
+  .btn-secondary:hover{
+    background: var(--terracota);
+    color:#fff;
   }
 
   .disclaimer{
@@ -558,8 +626,10 @@
       <div class="field-error" id="err-whats">Digite um WhatsApp válido, com DDD.</div>
     </div>
 
-    <button class="btn btn-primary" onclick="validarCaptura()">Continuar</button>
-    <button class="btn btn-ghost" onclick="goTo('screen-abertura')">Voltar</button>
+    <div class="nav-row">
+      <button class="btn btn-ghost" onclick="goTo('screen-abertura')">Voltar</button>
+      <button class="btn btn-primary" onclick="validarCaptura()">Continuar</button>
+    </div>
   </div>
 
   <!-- TELAS DE PERGUNTAS geradas via JS -->
@@ -585,7 +655,27 @@
 
     <div class="closing-msg">"Recebi suas respostas e vou me preparar para nossa sessão."</div>
 
-    <a class="btn btn-primary" href="https://calendar.app.google/oteKwhHTh7MTJQWYA" target="_blank" rel="noopener">Agendar minha primeira sessão</a>
+    <div class="next-steps-box">
+      <div class="next-steps-title">Próximos passos</div>
+      <p class="next-steps-text">Esta avaliação é gratuita. Para garantir seu horário, a sessão é confirmada após o pagamento.</p>
+
+      <div class="step-row">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-label">Realize o pagamento da sua sessão</div>
+          <a class="btn btn-primary" href="https://mpago.la/1Ss4tV7" target="_blank" rel="noopener">Pagar minha sessão</a>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-label">Depois do pagamento, escolha seu horário</div>
+          <a class="btn btn-secondary" href="https://calendar.app.google/oteKwhHTh7MTJQWYA" target="_blank" rel="noopener">Agendar minha primeira sessão</a>
+        </div>
+      </div>
+    </div>
+
     <div class="send-status" id="sendStatus">Suas respostas foram enviadas com sucesso.</div>
 
     <div class="disclaimer">Este rastreio é uma ferramenta de organização clínica pré-sessão, não um instrumento diagnóstico. O perfil acima é uma hipótese de trabalho a ser confirmada na avaliação clínica presencial.</div>
@@ -595,7 +685,7 @@
 
 <script>
 /* ============ CONFIG ============ */
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxd4NQteH3u-w2mmErne7trtF-6jQw0hs_GV2AV_D-X-g9diLHNXGyJqRPxeQL6jnZI_w/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby9wj9ErUwL6-2mkW1yqeF_Fty3psB9aR1qVDyju7NGrq4zANwfRWa_iLCpjorW5mIQEg/exec";
 
 /* ============ PERGUNTAS ============ */
 const questions = [
